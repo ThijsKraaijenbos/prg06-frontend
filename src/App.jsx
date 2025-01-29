@@ -4,6 +4,7 @@ import SillyCats from "./pages/SillyCats.jsx";
 import Details from "./pages/Details.jsx";
 import Layout from "./components/Layout.jsx";
 import Create from "./pages/Create.jsx";
+import Edit from "./pages/Edit.jsx";
 
 function App() {
 
@@ -20,13 +21,17 @@ function App() {
                     element: <SillyCats/>,
                 },
                 {
+                    path: '/create',
+                    element: <Create/>,
+                },
+                {
                     path: '/details/:id',
                     element: <Details/>,
                 },
                 {
-                    path: '/create',
-                    element: <Create/>,
-                },
+                    path: '/edit/:id',
+                    element: <Edit/>,
+                }
             ]
         }
     ]);

@@ -1,21 +1,48 @@
-import {useState} from "react";
-import {useNavigate} from "react-router";
+import {useEffect, useState} from "react";
+import {useNavigate, useParams} from "react-router";
 
-function Create() {
-
+function Edit() {
     const navigate = useNavigate()
 
+    const {id} = useParams()
+    const [cat, setCat] = useState([])
+
     const [formData, setFormData] = useState({
-        name: '',
-        description: '',
-        displayTag: '',
-        imgUrl: ''
+        "name": '',
+        "description": '',
+        "displayTag": '',
+        "imgUrl": ''
     })
 
-    async function createCat(formData) {
+    useEffect(() => {
+        async function fetchCat() {
+            try {
+                const response = await fetch(`http://145.24.223.193:8080/silly-cats/${id}`, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                    }
+                });
+                const data = await response.json();
+                setCat(data);
+
+                setFormData({
+                    "name": data.name,
+                    "description": data.description,
+                    "imgUrl": data.imgUrl
+                })
+            } catch (error) {
+                console.error('Fout bij het ophalen van de kat:', error);
+            }
+        }
+
+        fetchCat();
+    }, []);
+
+    async function editCat(formData) {
         try {
-            const response = await fetch('http://145.24.223.193:8080/silly-cats', {
-                method: 'POST',
+            const response = await fetch(`http://145.24.223.193:8080/silly-cats/${id}`, {
+                method: 'PUT',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -50,10 +77,9 @@ function Create() {
         try {
             event.preventDefault();
 
-            await createCat(formData);
+            await editCat(formData);
 
             console.log('Formulier verzonden:', JSON.stringify(formData));
-
 
         } catch(error) {
             console.log("error handling submit" + error)
@@ -68,7 +94,7 @@ function Create() {
                        placeholder={"Name"}
                        name={"name"}
                        id={"name"}
-                       value={formData.name}
+                       value={formData.name ?? cat.name}
                 />
 
                 <input type={"text"}
@@ -76,7 +102,7 @@ function Create() {
                        placeholder={"Description"}
                        name={"description"}
                        id={"description"}
-                       value={formData.description}
+                       value={formData.description ?? cat.description}
                 />
 
                 <input type={"text"}
@@ -84,7 +110,7 @@ function Create() {
                        placeholder={"Display Tag (max 5 characters)"}
                        name={"displayTag"}
                        id={"displayTag"}
-                       value={formData.displayTag}
+                       value={formData.displayTag ?? cat.displayTag}
                 />
 
                 <input type={"text"}
@@ -92,13 +118,13 @@ function Create() {
                        placeholder={"Image URL"}
                        name={"imgUrl"}
                        id={"imgUrl"}
-                       value={formData.imgUrl}
+                       value={formData.imgUrl ?? cat.imgUrl}
 
                 />
-                <input type={"submit"} value={"Create Cat"}/>
+                <input type={"submit"} value={`Update ${cat.name}`}/>
             </form>
         </>
     )
 }
 
-export default Create
+export default Edit

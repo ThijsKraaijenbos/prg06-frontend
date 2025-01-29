@@ -1,9 +1,5 @@
 import {useEffect, useState} from "react";
 import SillyCat from "../components/SillyCat.jsx";
-import { TbChevronLeft } from "react-icons/tb";
-import { TbChevronLeftPipe } from "react-icons/tb";
-import { TbChevronRight } from "react-icons/tb";
-import { TbChevronRightPipe } from "react-icons/tb";
 import Pagination from "../components/Pagination.jsx";
 
 function SillyCats() {

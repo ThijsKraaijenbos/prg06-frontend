@@ -7,6 +7,7 @@
   overflow-x:hidden;
 }
 
+
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -41,4 +42,8 @@
 
 .read-the-docs {
   color: #888;
+}
+
+.custom-gradient {
+  mask-image: linear-gradient(180deg, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%);
 }
