@@ -3,11 +3,12 @@ import {createBrowserRouter, RouterProvider} from "react-router";
 import SillyCats from "./pages/SillyCats.jsx";
 import Details from "./pages/Details.jsx";
 import Layout from "./components/Layout.jsx";
+import Create from "./pages/Create.jsx";
 
 function App() {
 
-    // const onCreateProduct = (setChessSpots, chessSpots, data) => {
-    //     setChessSpots([...chessSpots, data])
+    // const onCreateCat = (cats, setCats, data) => {
+    //     setCats ([...cats, data])
     // }
 
     const router = createBrowserRouter([
@@ -21,6 +22,10 @@ function App() {
                 {
                     path: '/details/:id',
                     element: <Details/>,
+                },
+                {
+                    path: '/create',
+                    element: <Create/>,
                 },
             ]
         }

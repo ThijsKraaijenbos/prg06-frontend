@@ -1,23 +1,26 @@
 import {useEffect, useState} from "react";
 import SillyCat from "../components/SillyCat.jsx";
-import {Link, useParams, useSearchParams} from "react-router";
-import {flushSync} from "react-dom";
-import error from "eslint-plugin-react/lib/util/error.js";
+import { TbChevronLeft } from "react-icons/tb";
+import { TbChevronLeftPipe } from "react-icons/tb";
+import { TbChevronRight } from "react-icons/tb";
+import { TbChevronRightPipe } from "react-icons/tb";
+import Pagination from "../components/Pagination.jsx";
 
 function SillyCats() {
+    const [loading, setLoading] = useState(false)
 
     const [cats, setCats] = useState([])
     const [totalItems, setTotalItems] = useState(0)
     const [totalPages, setTotalPages] = useState(0)
-    const [previousPage, setPreviousPage] = useState(null)
-    const [nextPage, setNextPage] = useState(2)
     const [page, setPage] = useState(1)
-    const [limit, setLimit] = useState([])
+    const [limit, setLimit] = useState()
+    const [previousPage, setPreviousPage] = useState(null)
+    const [nextPage, setNextPage] = useState(null)
 
     useEffect(() => {
         async function fetchCats() {
             try {
-
+                setLoading(true)
                 const response = await fetch(`http://145.24.223.193:8080/silly-cats?page=${page}&limit=${limit}`, {
                     method: 'GET',
                     headers: {
@@ -25,24 +28,19 @@ function SillyCats() {
                     }
                 });
                 const data = await response.json();
+                setLoading(false);
                 setCats(data.items);
-                setTotalItems(data.pagination.totalItems)
-                setTotalPages(data.pagination.totalPages)
 
-                const prev = data.pagination._links.previous.page
-                const next = data.pagination._links.next.page
-                if (prev !== null) {
-                    setPreviousPage(prev)
-                }
-                if (next !== null) {
-                    setNextPage(next)
-                }
+                setTotalItems(data.pagination.totalItems);
+                setTotalPages(data.pagination.totalPages);
+
+                setPreviousPage(data.pagination._links?.previous?.page ?? null);
+                setNextPage(data.pagination._links?.next?.page ?? null);
 
             } catch (error) {
                 console.error('Fout bij het ophalen van de katten:', error);
             }
         }
-        console.log(limit)
         fetchCats();
     }, [limit, page]);
 
@@ -55,24 +53,25 @@ function SillyCats() {
 
 
     return (
+    <>
+        {loading ? (
+            <p>Loading cats...</p>
+            ) : (
         <div>
             <h2>There are a total of {totalItems} cats </h2>
-            <form onSubmit={onLimitInput} className={"flex flex-col mb-5 w-[50%]"}>
-                <label htmlFor={"limit"}>Amount of items to load per page</label>
-                <input type={"number"} name={"limit"} max={totalItems}/>
-                <input type={"submit"} value={"Submit"} name={"Submit"}/>
-            </form>
+
+            <Pagination page={page} totalPages={totalPages} previousPage={previousPage} setPage={setPage} nextPage={nextPage} onLimitInput={onLimitInput} totalItems={totalItems}
+            ></Pagination>
 
             <div className={"grid grid-cols-3 gap-4 max-w-max"}>
                 {cats.map((cat) =>
                     <SillyCat key={cat.id} cat={cat}/>
                 )}
             </div>
-            <div className={"pagination"}>
-                <button onClick={() => setPage(previousPage)}>Previous</button>
-                <button onClick={() => setPage(nextPage)}>Next</button>
-            </div>
+
         </div>
+        )}
+    </>
     )
 }
 
