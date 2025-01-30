@@ -18,19 +18,19 @@ function App() {
             children: [
                 {
                     path: '/',
-                    element: <SillyCats/>,
+                    element: <SillyCats/>
                 },
                 {
                     path: '/create',
-                    element: <Create/>,
+                    element: <Create/>
                 },
                 {
                     path: '/details/:id',
-                    element: <Details/>,
+                    element: <Details/>
                 },
                 {
                     path: '/edit/:id',
-                    element: <Edit/>,
+                    element: <Edit/>
                 }
             ]
         }

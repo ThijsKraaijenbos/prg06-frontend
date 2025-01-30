@@ -3,7 +3,7 @@ import {Link} from "react-router";
 function SillyCat({cat}) {
 
     return (
-        <div className={"relative bg-gray-200 rounded-t-3xl rounded-b-xl pb-10"}>
+        <div className={"relative bg-gray-200 rounded-t-[2rem] rounded-b-xl pb-10"}>
             <img className={"w-[20rem] z-1 h-[20rem] rounded-t-3xl custom-gradient object-cover"} src={cat.imgUrl} alt={"image of "+cat.name}/>
         <div className={"absolute bottom-5 left-1/2 -translate-x-1/2 w-[100%]"}>
             <h2 className={"font-bold text-[#EEEEEE] text-4xl mt-[-2rem]"}>{cat.name}</h2>
