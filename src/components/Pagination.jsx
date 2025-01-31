@@ -35,7 +35,7 @@ function Pagination({page, totalPages, previousPage, setPage, nextPage, totalIte
                         name={"limit"}
                         id={"limit"}
                         className={"rounded"}
-                        value={"10"}
+                        defaultValue={"10"}
                 >
                     <option value="5">5</option>
                     <option value="10">10</option>
