@@ -58,7 +58,7 @@ function Edit() {
             if (response.ok) { // Check if the response status is OK (200-299)
                 navigate('/');
             } else {
-                console.error('Server responded with an error:', response.status, response.statusText);
+                alert(response.statusText)
             }
         } catch (error) {
             console.error('Er is een fout opgetreden:', error);
@@ -107,7 +107,7 @@ function Edit() {
 
                 <input type={"text"}
                        onChange={handleInputChange}
-                       placeholder={"Display Tag (max 5 characters)"}
+                       placeholder={"Display Tag (max 7 characters)"}
                        name={"displayTag"}
                        id={"displayTag"}
                        value={formData.displayTag ?? cat.displayTag}

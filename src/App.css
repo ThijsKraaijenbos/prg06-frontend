@@ -45,5 +45,43 @@
 }
 
 .custom-gradient {
-  mask-image: linear-gradient(180deg, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%);
+  mask-image: linear-gradient(180deg, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 85%);
+}
+.custom-shadow {
+  filter: drop-shadow(0 0 0.2rem rgba(0, 0, 0, 0.6))
+}
+.custom-shadow2 {
+  filter: drop-shadow(0 0.15rem 0.1rem rgba(0, 0, 0, 0.1))
+}
+.custom-shadow3 {
+  filter: drop-shadow(0 0.2rem 0.5rem rgba(0, 0, 0, 0.5))
+}
+
+.animation-custom1 {
+  animation: load-from-side 0.5s ease-in-out forwards;
+}
+.animation-custom2 {
+  animation: unload 0.5s ease-in-out forwards;
+}
+
+.custom-grid {
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 16rem) )
+}
+
+@keyframes load-from-side {
+  0%, 100% {
+    transform: translateX(-30rem);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes unload {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-30rem);
+  }
 }

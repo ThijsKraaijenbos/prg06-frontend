@@ -8,12 +8,12 @@ function Layout() {
                 <h2>Silly Cats 3.0</h2>
                 <nav className={"flex"}>
                     <ul className={"flex gap-8"}>
-                        <Link to={`/`}>Home</Link>
-                        <Link to={`/create`}>Create</Link>
+                        <Link className={"text-[#76ABAE] hover:text-[#639496]"} to={`/`}>Home</Link>
+                        <Link className={"text-[#76ABAE] hover:text-[#639496]"} to={`/create`}>Create</Link>
                     </ul>
                 </nav>
             </header>
-            <main className={"flex justify-center w-[100vw]"}>
+            <main>
                 <div>
                 <Outlet/>
                 </div>
