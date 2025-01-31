@@ -48,6 +48,16 @@ function SillyCats() {
     function onLimitInput(event) {
         event.preventDefault()
         setLimit(event.target.value)
+
+        let nameFilter = document.getElementById("nameFilter")
+        let genderFilter = document.getElementById("genderFilter");
+        let furColorFilter = document.getElementById("furColorFilter");
+        nameFilter.value = ""
+        genderFilter.value = "select"
+        furColorFilter.value = ""
+
+        setSearchFilter()
+
     }
 
 
@@ -60,25 +70,39 @@ function SillyCats() {
         }
     }, [totalPages]);
 
+
+    //Very ugly filter code but it sorta works fine enough, tried making it better for like 3 hours but
+    //didn't work :(
     const filter = (clear) => {
         let nameFilter = document.getElementById("nameFilter")
         let genderFilter = document.getElementById("genderFilter");
+        let furColorFilter = document.getElementById("furColorFilter");
 
         if (clear === true) {
-            console.log("cleared")
             nameFilter.value = ""
             genderFilter.value = "select"
+            furColorFilter.value = ""
 
             setSearchFilter()
         } else {
             if (genderFilter.value !== "select") {
-                const filterValues = cats.filter(cat => cat.name.toLowerCase().includes(nameFilter.value) && cat.gender === genderFilter.value)
+                console.log("FUR COLOR = " + furColorFilter.value)
+
+                const filterValues = cats.filter(
+                    cat => cat.name.toLowerCase().includes(nameFilter.value)
+                        && cat.gender === genderFilter.value
+                        && cat.furColor.toLowerCase().includes(furColorFilter.value))
+
                 setSearchFilter(filterValues)
             } else {
-                const filterValues = cats.filter(cat => cat.name.toLowerCase().includes(nameFilter.value))
+                console.log("FUR COLOR = " + furColorFilter.value)
+
+                const filterValues = cats.filter(
+                    cat => cat.name.toLowerCase().includes(nameFilter.value)
+                        && cat.furColor?.toLowerCase().includes(furColorFilter.value))
+
                 setSearchFilter(filterValues)
             }
-                console.log(nameFilter.value, genderFilter.value)
         }
     }
 
@@ -96,13 +120,20 @@ function SillyCats() {
                                onChange={filter}/>
                     </div>
                     <div className={"flex flex-col w-[15rem]"}>
+                        <label htmlFor={"furColorFilter"}>Fur Color</label>
+                        <input className={"rounded-lg p-1"} type={"text"} id={"furColorFilter"} name={"furColorFilter"}
+                               onChange={filter}/>
+                    </div>
+                    <div className={"flex flex-col w-[15rem]"}>
                         <label htmlFor={"genderFilter"}>Gender</label>
                         <select
                             onChange={filter}
                             name={"genderFilter"}
                             id={"genderFilter"}
-                            className={"rounded-lg p-1"}>
-                            <option selected disabled value={"select"}>Select Gender</option>
+                            className={"rounded-lg p-1"}
+                            defaultValue={"select"}
+                        >
+                            <option disabled value={"select"}>Select Gender</option>
                             <option value={"male"}>Male</option>
                             <option value={"female"}>Female</option>
                             <option value={"unknown"}>Unknown</option>

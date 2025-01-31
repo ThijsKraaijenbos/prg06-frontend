@@ -175,6 +175,7 @@ function Create() {
                         <div className={"flex flex-col w-[45%]"}>
                             <label htmlFor={"gender"} className={"text-2xl font-bold"}>Gender</label>
                             <select
+                                defaultValue={"unknown"}
                                 onChange={handleInputChange}
                                 name={"gender"}
                                 id={"gender"}
@@ -182,7 +183,7 @@ function Create() {
                             >
                                 <option value={"male"}>Male</option>
                                 <option value={"female"}>Female</option>
-                                <option selected value={"unknown"}>Unknown</option>
+                                <option value={"unknown"}>Unknown</option>
                             </select>
                         </div>
                     </div>

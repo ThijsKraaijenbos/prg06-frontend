@@ -34,9 +34,11 @@ function Pagination({page, totalPages, previousPage, setPage, nextPage, totalIte
                 <select onChange={(event) => onLimitInput(event)}
                         name={"limit"}
                         id={"limit"}
-                        className={"rounded"}>
+                        className={"rounded"}
+                        defaultValue={"10"}
+                >
                     <option value="5">5</option>
-                    <option selected value="10">10</option>
+                    <option value="10">10</option>
                     <option value="25">25</option>
                     <option value={totalItems}>all</option>
                 </select>
