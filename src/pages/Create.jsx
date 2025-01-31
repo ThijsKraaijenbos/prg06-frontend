@@ -16,7 +16,7 @@ function Create() {
         imgUrl: '',
         furColor: '',
         birthDate: '',
-        gender: '',
+        gender: 'unknown',
     })
 
     async function createCat(formData) {
@@ -40,8 +40,10 @@ function Create() {
 
             const data = await response.json();
 
+
             if (response.ok) { // Check if the response status is OK (200-299)
                 navigate('/');
+
             } else {
                 // alert()
                 const errorArray = Object.values(data.errors)
@@ -175,7 +177,7 @@ function Create() {
                         <div className={"flex flex-col w-[45%]"}>
                             <label htmlFor={"gender"} className={"text-2xl font-bold"}>Gender</label>
                             <select
-                                defaultValue={"unknown"}
+                                value={"unknown"}
                                 onChange={handleInputChange}
                                 name={"gender"}
                                 id={"gender"}

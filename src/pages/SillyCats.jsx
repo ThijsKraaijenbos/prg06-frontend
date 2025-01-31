@@ -112,63 +112,64 @@ function SillyCats() {
             <p>Loading cats...</p>
         </div>
             ) : (
-            <>
-                <form className={"flex flex-col absolute left-5 gap-4 justify-start"}>
-                    <div className={"flex flex-col w-[15rem]"}>
-                        <label htmlFor={"nameFilter"}>Name</label>
-                        <input className={"rounded-lg p-1"} type={"text"} id={"nameFilter"} name={"nameFilter"}
-                               onChange={filter}/>
-                    </div>
-                    <div className={"flex flex-col w-[15rem]"}>
-                        <label htmlFor={"furColorFilter"}>Fur Color</label>
-                        <input className={"rounded-lg p-1"} type={"text"} id={"furColorFilter"} name={"furColorFilter"}
-                               onChange={filter}/>
-                    </div>
-                    <div className={"flex flex-col w-[15rem]"}>
-                        <label htmlFor={"genderFilter"}>Gender</label>
-                        <select
-                            onChange={filter}
-                            name={"genderFilter"}
-                            id={"genderFilter"}
-                            className={"rounded-lg p-1"}
-                            defaultValue={"select"}
-                        >
-                            <option disabled value={"select"}>Select Gender</option>
-                            <option value={"male"}>Male</option>
-                            <option value={"female"}>Female</option>
-                            <option value={"unknown"}>Unknown</option>
-                        </select>
-                    </div>
-                    <button onClick={(event) => {
-                        event.preventDefault();
-                        filter(true);
-                    }}>Clear Filters
-                    </button>
-                </form>
-                <div className={"flex justify-center items-center w-[100vw]"}>
-                    <div className={"flex flex-col justify-center items-center w-max"}>
-                        <h2>There are a total of {totalItems} cats </h2>
+        <>
+            <h2>There are a total of {totalItems} cats </h2>
 
-                        <Pagination page={page} totalPages={totalPages} previousPage={previousPage} setPage={setPage}
-                                    nextPage={nextPage} onLimitInput={onLimitInput} totalItems={totalItems}
-                                    limit={limit}
-                        ></Pagination>
+            <Pagination page={page} totalPages={totalPages} previousPage={previousPage} setPage={setPage}
+                        nextPage={nextPage} onLimitInput={onLimitInput} totalItems={totalItems}
+                        limit={limit}
+            ></Pagination>
+            <form className={"flex flex-col absolute left-5 gap-4 justify-start"}>
+                <div className={"flex flex-col w-[15rem]"}>
+                    <label htmlFor={"nameFilter"}>Name</label>
+                    <input className={"rounded-lg p-1"} type={"text"} id={"nameFilter"} name={"nameFilter"}
+                           onChange={filter}/>
+                </div>
+                <div className={"flex flex-col w-[15rem]"}>
+                    <label htmlFor={"furColorFilter"}>Fur Color</label>
+                    <input className={"rounded-lg p-1"} type={"text"} id={"furColorFilter"} name={"furColorFilter"}
+                           onChange={filter}/>
+                </div>
+                <div className={"flex flex-col w-[15rem]"}>
+                    <label htmlFor={"genderFilter"}>Gender</label>
+                    <select
+                        onChange={filter}
+                        name={"genderFilter"}
+                        id={"genderFilter"}
+                        className={"rounded-lg p-1"}
+                        value={"select"}
+                    >
+                        <option disabled value={"select"}>Select Gender</option>
+                        <option value={"male"}>Male</option>
+                        <option value={"female"}>Female</option>
+                        <option value={"unknown"}>Unknown</option>
+                    </select>
+                </div>
+                <button onClick={(event) => {
+                    event.preventDefault();
+                    filter(true);
+                }}>Clear Filters
+                </button>
+            </form>
+            <div className={"flex justify-center items-center w-[100vw]"}>
+                <div className={"flex flex-col justify-center items-center w-max"}>
 
-                        <div className={"grid custom-grid items-center justify-center gap-4 w-[60vw]"}>
-                            {!searchFilter ?
-                                cats.map((cat) =>
-                                    <SillyCat preview={false} key={cat.id} cat={cat}/>
-                                ) :
-                                searchFilter.map((cat) =>
-                                    <SillyCat preview={false} key={cat.id} cat={cat}/>
-                                )
+                    <div className={"grid custom-grid items-center justify-center gap-4 w-[60vw]"}>
+                        {!searchFilter ?
+                            cats.map((cat) =>
+                                <SillyCat preview={false} key={cat.id} cat={cat}/>
+                            ) :
+                            searchFilter.map((cat) =>
+                                <SillyCat preview={false} key={cat.id} cat={cat}/>
+                            )
 
-                            }
-                        </div>
+                        }
                     </div>
                 </div>
-            </>
-        )
+            </div>
+        </>
+    )
     )
 }
-    export default SillyCats
+
+export default SillyCats

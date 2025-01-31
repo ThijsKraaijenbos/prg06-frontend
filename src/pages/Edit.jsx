@@ -33,8 +33,6 @@ function Edit() {
                 const data = await response.json();
                 setCat(data);
 
-                console.log(data.birthDate)
-
                 setFormData({
                     name: data.name,
                     description: data.description,
@@ -75,6 +73,7 @@ function Edit() {
 
             if (response.ok) { // Check if the response status is OK (200-299)
                 navigate('/');
+                // console.log(formData)
             } else {
                 // alert()
                 const errorArray = Object.values(data.errors)
@@ -211,7 +210,7 @@ function Edit() {
                                 name={"gender"}
                                 id={"gender"}
                                 className={"rounded-lg p-1"}
-                                defaultValue={"unknown"}
+                                value={formData.gender ?? "unknown"}
                             >
                                 <option value={"male"}>Male</option>
                                 <option value={"female"}>Female</option>
@@ -226,7 +225,7 @@ function Edit() {
                                onChange={handleInputChange}
                                name={"birthDate"}
                                id={"birthDate"}
-                               value={formData.birthDate}
+                               value={cat.birthDate ? new Date(cat.birthDate).toISOString().split('T')[0] : formData.birthDate}
                                className={"rounded-lg p-1"}
                         />
                     </div>

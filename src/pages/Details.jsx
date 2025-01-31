@@ -23,6 +23,8 @@ function Details() {
 
                 setCat(data);
 
+                console.log(data.gender)
+
             } catch (error) {
                 console.error('Fout bij het ophalen van de kat:', error);
             }
@@ -65,7 +67,7 @@ function Details() {
                                 </div>
                                 <div className={"flex flex-col text-left gap-1"}>
                                     <h2 className={"text-4xl font-semibold"}>Fur Color</h2>
-                                    <p>{cat.furColor}</p>
+                                    <p>{cat.furColor ? cat.furColor : "Unknown Fur Color"}</p>
                                 </div>
                             </div>
                             <div className={"flex justify-between gap-5 flex-col"}>
@@ -85,8 +87,8 @@ function Details() {
                                     }</p>
                                 </div>
                             </div>
-                            <div className={"flex flex-col"}>
-                                <Link to={'/edit/' + cat.id}>Edit</Link>
+                            <div className={"flex text-xl flex-col"}>
+                                <Link className={"text-[#76ABAE] hover:text-[#639496]"} to={'/edit/' + cat.id}>Edit</Link>
                                 <button type={"submit"} onClick={deleteHandler}
                                         className={"p-0 focus:outline-none bg-transparent border-none text-[#d91a30] hover:text-[#bd172a]"}>Delete
                                 </button>
