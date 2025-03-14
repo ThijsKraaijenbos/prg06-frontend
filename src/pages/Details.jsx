@@ -12,7 +12,7 @@ function Details() {
         async function fetchCat() {
             try {
                 setLoading(true)
-                const response = await fetch(`http://145.24.223.193:8080/silly-cats/${id}`, {
+                const response = await fetch(`${import.meta.env.VITE_APP_URL}/silly-cats/${id}`, {
                     method: 'GET',
                     headers: {
                         'Accept': 'application/json',
@@ -35,7 +35,7 @@ function Details() {
 
     const deleteHandler = async () => {
         if (confirm(`Are you sure you want to delete ${cat.name}?`) === true) {
-            await fetch(`http://145.24.223.193:8080/silly-cats/${id}`, {
+            await fetch(`${import.meta.env.VITE_APP_URL}/silly-cats/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'Accept': 'application/json',

@@ -17,8 +17,8 @@ function SillyCats() {
     useEffect(() => {
         async function fetchCats() {
             try {
-
-                const response = await fetch(`http://145.24.223.193:8080/silly-cats?page=${page}&limit=${limit}`, {
+                console.log(import.meta.env.VITE_APP_URL)
+                const response = await fetch(`${import.meta.env.VITE_APP_URL}/silly-cats?page=${page}&limit=${limit}`, {
                     method: 'GET',
                     headers: {
                         'Accept': 'application/json',

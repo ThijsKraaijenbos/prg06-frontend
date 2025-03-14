@@ -24,7 +24,7 @@ function Edit() {
     useEffect(() => {
         async function fetchCat() {
             try {
-                const response = await fetch(`http://145.24.223.193:8080/silly-cats/${id}`, {
+                const response = await fetch(`${import.meta.env.VITE_APP_URL}/silly-cats/${id}`, {
                     method: 'GET',
                     headers: {
                         'Accept': 'application/json',
@@ -32,6 +32,12 @@ function Edit() {
                 });
                 const data = await response.json();
                 setCat(data);
+
+                if (data.birthDate) {
+                    data.birthDate = new Date(data.birthDate).toISOString().split('T')[0]
+                } else {
+                    data.birthDate = ''
+                }
 
                 setFormData({
                     name: data.name,
@@ -52,7 +58,7 @@ function Edit() {
 
     async function editCat(formData) {
         try {
-            const response = await fetch(`http://145.24.223.193:8080/silly-cats/${id}`, {
+            const response = await fetch(`${import.meta.env.VITE_APP_URL}/silly-cats/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json',
@@ -225,7 +231,7 @@ function Edit() {
                                onChange={handleInputChange}
                                name={"birthDate"}
                                id={"birthDate"}
-                               value={cat.birthDate ? new Date(cat.birthDate).toISOString().split('T')[0] : formData.birthDate}
+                               value={formData.birthDate ?? cat.birthDate}
                                className={"rounded-lg p-1"}
                         />
                     </div>

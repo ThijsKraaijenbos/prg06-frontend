@@ -21,7 +21,7 @@ function Create() {
 
     async function createCat(formData) {
         try {
-            const response = await fetch('http://145.24.223.193:8080/silly-cats', {
+            const response = await fetch(`${import.meta.env.VITE_APP_URL}/silly-cats`, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -202,7 +202,7 @@ function Create() {
                     </div>
 
 
-                    <input type={"submit"} value={"Create Cat"}/>
+                    <input className={"font-bold text-2xl bg-[#76ABAE] hover:bg-[#639496] p-1 rounded"} type={"submit"} value={"Create"}/>
 
                     <h3 className={"text-sm"}><span className={"text-red-800 absolute top-0 right-0"}>* Required</span>
                     </h3>
