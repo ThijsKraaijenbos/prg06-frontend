@@ -21,9 +21,11 @@ function Details() {
                 const data = await response.json();
                 setLoading(false)
 
-                setCat(data);
+                if (data.gender === "unknown") {
+                    data.gender = "Unknown Gender"
+                }
 
-                console.log(data.gender)
+                setCat(data);
 
             } catch (error) {
                 console.error('Fout bij het ophalen van de kat:', error);
