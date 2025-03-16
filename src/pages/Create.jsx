@@ -177,7 +177,7 @@ function Create() {
                         <div className={"flex flex-col w-[45%]"}>
                             <label htmlFor={"gender"} className={"text-2xl font-bold"}>Gender</label>
                             <select
-                                value={"unknown"}
+                                value={formData.gender ?? "unknown"}
                                 onChange={handleInputChange}
                                 name={"gender"}
                                 id={"gender"}
